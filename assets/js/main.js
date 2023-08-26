@@ -5,10 +5,17 @@ const maxRecords = 151
 const limit = 12
 let offset = 0;
 
+const clickListItem = () => {
+    console.log("CLICOU");
+
+    window.open('./pokemonDetails.html', "_self");
+
+}
+
 const convertPokemonToLi = (pokemon) => {
 
     return `
-    <li class="pokemon ${pokemon.type}">
+    <li class="pokemon ${pokemon.type}" onclick="clickListItem()">
         <span class="number">#${pokemon.number.toString().padStart(4, "0")}</span>
         <span class="name">${pokemon.name}</span>
 
@@ -28,6 +35,14 @@ const loadPokemonItens = (offset, limit) => {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
         const newHtml = pokemons.map(convertPokemonToLi).join('')
         pokemonList.innerHTML += newHtml
+
+        // const itensLista = pokemonList.getElementsByTagName("li")
+
+        // for (let item of itensLista) {
+        //     item.addEventListener("click", () => console.log("CLICOU"));
+        // }
+
+        // console.log(itensLista);
     })
 }
 
